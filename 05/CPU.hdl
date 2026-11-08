@@ -39,5 +39,45 @@ CHIP CPU {
         pc[15];          // address of next instruction
 
     PARTS:
-    // Put your code here:
+    // ---- 指令解碼 ----
+    // instruction[15]：0 = A 指令，1 = C 指令
+    // C 指令格式：1 1 1 a c1 c2 c3 c4 c5 c6 d1 d2 d3 j1 j2 j3
+    Not(in=instruction[15], out=isA);
+    And(a=instruction[15], b=true, out=isC);
+
+    // ---- A 暫存器 ----
+    // A 指令：載入 instruction；C 指令且 d1=1：載入 ALU 輸出
+    Mux16(a=aluOut, b=instruction, sel=isA, out=aIn);
+    And(a=isC, b=instruction[5], out=cWriteA);
+    Or(a=isA, b=cWriteA, out=loadA);
+    ARegister(in=aIn, load=loadA, out=aOut, out[0..14]=addressM);
+
+    // ---- D 暫存器 ----（C 指令且 d2=1）
+    And(a=isC, b=instruction[4], out=loadD);
+    DRegister(in=aluOut, load=loadD, out=dOut);
+
+    // ---- ALU ----（a 位元 instruction[12] 決定 y 是 A 還是 M）
+    Mux16(a=aOut, b=inM, sel=instruction[12], out=aOrM);
+    ALU(x=dOut, y=aOrM,
+        zx=instruction[11], nx=instruction[10],
+        zy=instruction[9],  ny=instruction[8],
+        f=instruction[7],   no=instruction[6],
+        out=aluOut, out=outM, zr=zr, ng=ng);
+
+    // ---- writeM ----（C 指令且 d3=1）
+    And(a=isC, b=instruction[3], out=writeM);
+
+    // ---- 跳躍判斷 ----
+    Not(in=zr, out=notzr);
+    Not(in=ng, out=notng);
+    And(a=notzr, b=notng, out=pos);           // out > 0
+    And(a=instruction[2], b=ng, out=jlt);     // j1：out < 0
+    And(a=instruction[1], b=zr, out=jeq);     // j2：out = 0
+    And(a=instruction[0], b=pos, out=jgt);    // j3：out > 0
+    Or(a=jlt, b=jeq, out=jle);
+    Or(a=jle, b=jgt, out=jcond);
+    And(a=isC, b=jcond, out=jump);
+
+    // ---- PC ----（跳躍則載入 A，否則 +1；reset 優先）
+    PC(in=aOut, load=jump, inc=true, reset=reset, out[0..14]=pc);
 }

@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 560" font-family="Microsoft JhengHei, Noto Sans TC, Arial, sans-serif" font-size="14">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+    <style>
+      .blk{fill:#eef4ff;stroke:#2b5797;stroke-width:2;rx:6}
+      .mux{fill:#fff4e0;stroke:#c77700;stroke-width:2}
+      .w{fill:none;stroke:#333;stroke-width:1.8}
+      .s{fill:none;stroke:#c00;stroke-width:1.5;stroke-dasharray:4 3}
+      .t{text-anchor:middle;dominant-baseline:middle}
+      .lbl{fill:#c00;font-weight:bold}
+      .sig{fill:#222;font-weight:bold}
+      .dot{fill:#333}
+    </style>
+  </defs>
+  <rect width="1320" height="560" fill="#ffffff"/>
+  <text x="660" y="24" class="t" font-size="20" font-weight="bold">Hack ALU 電路圖（16 位元）</text>
+
+  <!-- ===== x path (center y=110) ===== -->
+  <text x="22" y="95" class="sig">x[16]</text>
+  <path class="w" d="M20,105 H80" marker-end="url(#ar)"/>
+  <text x="40" y="135" font-size="12">0</text>
+  <path class="w" d="M50,130 H80" marker-end="url(#ar)"/>
+  <path class="mux" d="M80,75 L190,85 L190,135 L80,145 z"/>
+  <text x="135" y="110" class="t">Mux16</text>
+  <text x="92" y="105" font-size="11">a</text><text x="92" y="130" font-size="11">b</text>
+  <path class="s" d="M135,50 V80"/><text x="135" y="44" class="t lbl">zx</text>
+
+  <path class="w" d="M190,110 H210 V95 H400" marker-end="url(#ar)"/>
+  <circle class="dot" cx="210" cy="110" r="3.5"/>
+  <path class="w" d="M210,110 V170 H240" marker-end="url(#ar)"/>
+  <rect class="blk" x="240" y="150" width="110" height="40"/>
+  <text x="295" y="170" class="t">Not16</text>
+  <path class="w" d="M350,170 H380 V125 H400" marker-end="url(#ar)"/>
+  <path class="mux" d="M400,75 L510,85 L510,135 L400,145 z"/>
+  <text x="455" y="110" class="t">Mux16</text>
+  <text x="412" y="97" font-size="11">a</text><text x="412" y="127" font-size="11">b</text>
+  <path class="s" d="M455,50 V80"/><text x="455" y="44" class="t lbl">nx</text>
+  <text x="528" y="98" class="sig" font-size="12">x'</text>
+
+  <!-- ===== y path (center y=350) ===== -->
+  <text x="22" y="335" class="sig">y[16]</text>
+  <path class="w" d="M20,345 H80" marker-end="url(#ar)"/>
+  <text x="40" y="375" font-size="12">0</text>
+  <path class="w" d="M50,370 H80" marker-end="url(#ar)"/>
+  <path class="mux" d="M80,315 L190,325 L190,375 L80,385 z"/>
+  <text x="135" y="350" class="t">Mux16</text>
+  <text x="92" y="345" font-size="11">a</text><text x="92" y="370" font-size="11">b</text>
+  <path class="s" d="M135,290 V320"/><text x="135" y="284" class="t lbl">zy</text>
+
+  <path class="w" d="M190,350 H210 V335 H400" marker-end="url(#ar)"/>
+  <circle class="dot" cx="210" cy="350" r="3.5"/>
+  <path class="w" d="M210,350 V410 H240" marker-end="url(#ar)"/>
+  <rect class="blk" x="240" y="390" width="110" height="40"/>
+  <text x="295" y="410" class="t">Not16</text>
+  <path class="w" d="M350,410 H380 V365 H400" marker-end="url(#ar)"/>
+  <path class="mux" d="M400,315 L510,325 L510,375 L400,385 z"/>
+  <text x="455" y="350" class="t">Mux16</text>
+  <text x="412" y="337" font-size="11">a</text><text x="412" y="367" font-size="11">b</text>
+  <path class="s" d="M455,290 V320"/><text x="455" y="284" class="t lbl">ny</text>
+  <text x="528" y="338" class="sig" font-size="12">y'</text>
+
+  <!-- ===== Add16 / And16 ===== -->
+  <path class="w" d="M510,110 H545 V280 H580" marker-end="url(#ar)"/>
+  <path class="w" d="M545,160 H580" marker-end="url(#ar)"/>
+  <circle class="dot" cx="545" cy="160" r="3.5"/>
+  <path class="w" d="M510,350 H560 V180 H580" marker-end="url(#ar)"/>
+  <path class="w" d="M560,300 H580" marker-end="url(#ar)"/>
+  <circle class="dot" cx="560" cy="300" r="3.5"/>
+
+  <rect class="blk" x="580" y="145" width="110" height="50"/>
+  <text x="635" y="170" class="t">Add16  x'+y'</text>
+  <rect class="blk" x="580" y="265" width="110" height="50"/>
+  <text x="635" y="290" class="t">And16  x'&amp;y'</text>
+
+  <path class="w" d="M690,170 H710 V215 H730" marker-end="url(#ar)"/>
+  <path class="w" d="M690,290 H710 V245 H730" marker-end="url(#ar)"/>
+  <path class="mux" d="M730,195 L840,205 L840,255 L730,265 z"/>
+  <text x="785" y="230" class="t">Mux16</text>
+  <text x="742" y="217" font-size="11">b</text><text x="742" y="247" font-size="11">a</text>
+  <path class="s" d="M785,170 V200"/><text x="785" y="164" class="t lbl">f</text>
+
+  <!-- ===== no ===== -->
+  <path class="w" d="M840,230 H870 V215 H1060" marker-end="url(#ar)"/>
+  <circle class="dot" cx="870" cy="230" r="3.5"/>
+  <path class="w" d="M870,230 V300 H900" marker-end="url(#ar)"/>
+  <rect class="blk" x="900" y="280" width="110" height="40"/>
+  <text x="955" y="300" class="t">Not16</text>
+  <path class="w" d="M1010,300 H1035 V245 H1060" marker-end="url(#ar)"/>
+  <path class="mux" d="M1060,195 L1170,205 L1170,255 L1060,265 z"/>
+  <text x="1115" y="230" class="t">Mux16</text>
+  <text x="1072" y="217" font-size="11">a</text><text x="1072" y="247" font-size="11">b</text>
+  <path class="s" d="M1115,170 V200"/><text x="1115" y="164" class="t lbl">no</text>
+
+  <path class="w" d="M1170,230 H1315" marker-end="url(#ar)"/>
+  <text x="1255" y="215" class="sig">out[16]</text>
+
+  <!-- ===== zr / ng ===== -->
+  <circle class="dot" cx="1205" cy="230" r="3.5"/>
+  <path class="w" d="M1205,230 V380" marker-end="url(#ar)"/>
+  <rect class="blk" x="1130" y="380" width="150" height="50"/>
+  <text x="1205" y="397" class="t" font-size="12">Or8Way(out[0..7])</text>
+  <text x="1205" y="415" class="t" font-size="12">Or8Way(out[8..15]) → Or</text>
+  <path class="w" d="M1205,430 V455" marker-end="url(#ar)"/>
+  <rect class="blk" x="1150" y="455" width="110" height="34"/>
+  <text x="1205" y="472" class="t">Not</text>
+  <path class="w" d="M1205,489 V530" marker-end="url(#ar)"/>
+  <text x="1205" y="545" class="t sig">zr</text>
+
+  <circle class="dot" cx="1250" cy="230" r="3.5"/>
+  <path class="w" d="M1250,230 V250 H1300 V530" marker-end="url(#ar)"/>
+  <text x="1300" y="545" class="t sig">ng</text>
+  <text x="1296" y="300" font-size="12" text-anchor="end">out[15]</text>
+
+  <!-- legend -->
+  <rect x="600" y="430" width="440" height="110" fill="#fafafa" stroke="#bbb"/>
+  <text x="615" y="452" font-weight="bold">說明</text>
+  <text x="615" y="474" font-size="13">Mux16：sel=0 選 a、sel=1 選 b（紅色虛線 = 控制位元）</text>
+  <text x="615" y="494" font-size="13">zx/zy：把輸入清 0；nx/ny：把輸入反相</text>
+  <text x="615" y="514" font-size="13">f=1 → x'+y'，f=0 → x'&amp;y'；no：把輸出反相</text>
+  <text x="615" y="534" font-size="13">zr = 1 當 out = 0；ng = out[15]（out &lt; 0）</text>
+</svg>
